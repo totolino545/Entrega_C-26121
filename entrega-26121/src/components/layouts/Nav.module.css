@@ -1,0 +1,39 @@
+.navContainer {
+  display: flex;
+  justify-content: center; 
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  color: #e7e8ea; 
+  font-size: 1.5rem; 
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.navLink:hover {
+  color: #919191;
+  text-underline-offset: 4px;
+}
+
+/* Media Query para Escritorio (md: en Tailwind suele ser 768px) */
+@media (min-width: 768px) {
+  .navList {
+    flex-direction: row;
+    gap: 2.5rem; 
+  }
+
+  .navLink {
+    font-size: 1.125rem; 
+  }
+}
