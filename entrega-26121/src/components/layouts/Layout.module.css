@@ -1,7 +1,14 @@
-.titulo {
-  color: rgb(0, 255, 191);
-}
+.container {
+  display: flex;
+  flex-direction: column;
+  
 
-.productos {
-  color: yellow;
+}
+.main {
+    display: flex;
+  flex-direction: column;
+  height: 100vh;
+      justify-content: center;
+    align-items: center;
+  background-color: #f0f0d8;
 }

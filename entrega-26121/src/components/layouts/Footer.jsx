@@ -1,27 +1,71 @@
+import React, { useState, useEffect } from 'react';
 import styles from './Footer.module.css';
 
 const Footer = () => {
 
   const currentYear = new Date().getFullYear();
+  const [socialIcons, setSocialIcons] = useState([]);
+  const [error, setError] = useState(null);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+  // La ruta es relativa a public
+  fetch('/public/data/socialIcons.json')
+    .then((respuesta) => {
+        if (!respuesta.ok) 
+          throw new Error("No se pudo cargar la información de los productos");
+        return respuesta.json();
+      })
+      .then(datos => setSocialIcons(datos))
+      .catch(error => setError(error.message))
+      .finally(() => setCargando(false))
+  }, []);
 
   return (
-    <footer className="fixed bottom-0 left-0 w-screen h-20 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 z-30">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 dark:text-gray-400 text-sm">
-            © {currentYear} MiApp. Todos los derechos reservados.
-          </p>
+    <footer className="fixed bottom-0 left-0 w-screen h-14 border-t border-gray-200  z-30">
+      <div className={styles.footer}>
+        <div className=" h-14 flex flex-row justify-between items-center gap-4">
           
+
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-sm transition-colors">
-              Privacidad
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-sm transition-colors">
-              Términos
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-sm transition-colors">
-              Contacto
-            </a>
+              <a href="#" className="text-base font-medium text-gray-300 hover:text-gray-300 text-sm transition-colors">
+                Privacidad
+              </a>
+              <a href="#" className="text-base font-medium text-gray-300 hover:text-gray-300 text-sm transition-colors">
+                Términos
+              </a>
+              <a href="#" className="text-base font-medium text-gray-300 hover:text-gray-300 text-sm transition-colors">
+                Contacto
+              </a>
+          </div>
+          <div>
+            <div className='flex flex-row'>
+               <h3 className="text-xl font-bold mb-4">Seguinos</h3>
+            <ul className="relative space-y-2 -right-100">
+                 {socialIcons.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  className="text-gray-400 hover:text-white transition-colors duration-300 text-xl"
+                  aria-label={social.name}
+                >
+                  <img 
+                src={social.icon} 
+                alt="icono"
+                className="w-6 h-6"
+              />
+                </a>
+              ))}
+            </ul>
+            </div>
+
+            <div>
+              <p className="text-base font-medium text-gray-300 text-sm">
+                © {currentYear} MiApp. Todos los derechos reservados.
+              </p>            
+            </div>
+
+
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ const ItemListContainer = () => {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("/public/data/products.json")
       .then((respuesta) => {
         if (!respuesta.ok) 
           throw new Error("No se pudo cargar la información de los productos");

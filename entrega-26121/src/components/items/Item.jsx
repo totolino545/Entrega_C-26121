@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import estilos from './Item.module.css'
 import { Link } from 'react-router-dom';
+// import toCart from '../buttons/toCart'
 
 function Item({ title, description, price, image, category, id }) {
   const stock = 0
@@ -21,7 +22,7 @@ function Item({ title, description, price, image, category, id }) {
   }
 
   return (
-    <div className='relative top-20 '>
+    <div>
        
         <Link to={`/producto/${id}`} className="group relative">
                   
@@ -40,8 +41,7 @@ function Item({ title, description, price, image, category, id }) {
               <p>{cantidad}</p>
               <button onClick={incrementar}> + </button>   
           </div>
-      {/* 3. Conectamos la acción (onClick) a la lógica */}
-        
+          {/* <toCart/>         */}
         </Link>
       
     </div>

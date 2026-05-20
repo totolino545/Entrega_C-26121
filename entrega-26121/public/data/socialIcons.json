@@ -1,0 +1,6 @@
+  [
+    { "name": "Twitter", "icon": "/src/assets/twitter.svg", "url": "#" },
+    { "name": "GitHub", "icon": "/src/assets/github.svg", "url": "#" },
+    { "name": "LinkedIn", "icon": "/src/assets/linkedin.svg", "url": "#" },
+    { "name": "Discord", "icon": "/src/assets/discord.svg", "url": "#" }
+  ]
