@@ -1,0 +1,56 @@
+[
+    {
+      "id": 1,
+      "nombre": "Ana García",
+      "puesto": "Gerente General & Fundadora",
+      "descripcion": "Con 10 años de experiencia en e-commerce, lidera la visión y estrategia de la empresa.",
+      "email": "ana@tutienda.com",
+      "imagen": "https://randomuser.me/api/portraits/med/women/30.jpg",
+      "alt": "Ana García - Gerente General"
+    },
+    {
+      "id": 2,
+      "nombre": "Carlos Méndez",
+      "puesto": "Jefe de Logística",
+      "descripcion": "Garantiza que cada pedido llegue rápido y en perfectas condiciones.",
+      "email": "carlos@tutienda.com",
+      "imagen": "https://randomuser.me/api/portraits/med/men/97.jpg",
+      "alt": "Carlos Méndez - Jefe de Logística"
+    },
+    {
+      "id": 3,
+      "nombre": "Laura Fernández",
+      "puesto": "Atención al Cliente",
+      "descripcion": "Siempre lista para resolver tus dudas con amabilidad y rapidez.",
+      "email": "laura@tutienda.com",
+      "imagen": "https://randomuser.me/api/portraits/med/women/63.jpg",
+      "alt": "Laura Fernández - Atención al Cliente"
+    },
+    {
+      "id": 4,
+      "nombre": "Romina Herrera",
+      "puesto": "Atención al Cliente",
+      "descripcion": "Siempre lista para resolver tus dudas con amabilidad y rapidez.",
+      "email": "romina@tutienda.com",
+      "imagen": "https://randomuser.me/api/portraits/med/women/47.jpg",
+      "alt": "Romina Herrera - Atención al Cliente"
+    },
+    {
+      "id": 5,
+      "nombre": "Miguel Torres",
+      "puesto": "Desarrollador Web",
+      "descripcion": "Mantiene la tienda rápida, segura y con la mejor experiencia de usuario.",
+      "email": "miguel@tutienda.com",
+      "imagen": "https://randomuser.me/api/portraits/med/men/84.jpg",
+      "alt": "Miguel Torres - Desarrollador Web"
+    },
+    {
+      "id": 6,
+      "nombre": "Sofía Reyes",
+      "puesto": "Diseñadora & Community Manager",
+      "descripcion": "Crea la identidad visual y conecta con nuestra comunidad en redes.",
+      "email": "sofia@tutienda.com",
+      "imagen": "https://randomuser.me/api/portraits/med/women/52.jpg",
+      "alt": "Sofía Reyes - Diseñadora y Community Manager"
+    }
+  ]

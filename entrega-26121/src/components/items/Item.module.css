@@ -16,8 +16,3 @@
   padding: 10px;
 }
 
-.corazon {
-  cursor: pointer;
-  transition: color 0.3s ease;
-  color: var(--color-corazon, #ccc); 
-}

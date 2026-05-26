@@ -1,38 +1,32 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import CardProduct from "./CardProduct";
 
-const ProductoDetalle = () => {
+const DetalleProducto = () => {
   
   const { id } = useParams();
-  const [producto, setProducto] = useState(null);
+  const [product, setProduct] = useState(null);
   
   useEffect(() => {
     fetch("/data/products.json")
       .then(response => response.json())
       .then(data => {
         const productoEncontrado = data.find(p => p.id === parseInt(id));
-        setProducto(productoEncontrado);
+        setProduct(productoEncontrado);
       })
       .catch(error => console.error("Error al cargar el producto:", error));
   }, [id]);
   
-  if (!producto) return <h2>Cargando detalle del producto...</h2>;
+  if (!product) return <h2>Cargando detalle del producto...</h2>;
 
-  if (!producto.id) return <h2>Producto no encontrado.</h2>;
+  if (!product.id) return <h2>Producto no encontrado.</h2>;
   
   return (
-    <div>
-      <h1>ID {producto.id}</h1>
-      <h2>Detalle del Producto: {producto.nombre}</h2>
-
-      <img
-        src={producto.imagen}
-        alt={producto.nombre}
-        style={{ maxWidth: "400px" }}
-      />
-      <h3>${producto.precio}</h3>
-      <p>{producto.descripcion}</p>
+    <div className="flex flex-col  items-center m-4 p-4 gap-8">
+      <h2>Descripcion del producto</h2>
+      <p>{product.description}</p>
+      <CardProduct {...product} /> 
     </div>
   );
 };
-export default ProductoDetalle;
+export default DetalleProducto;

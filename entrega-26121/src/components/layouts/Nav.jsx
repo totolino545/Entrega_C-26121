@@ -5,13 +5,14 @@ import CartWidget from '../items/CartWidget';
 const Nav = () => {
   return (
 
-    <nav className="navlist fixed top-0 right-0 left-0 h-14 z-40">
+    <nav className="navlist ">
       <div  className={styles.nav}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
             <div className="flex items-center justify-between ">
-              <div className="flex items-center h-14">
-                <div className="shrink-0">
-                  <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" className="size-8" />
+              <div className="flex items-center h-32">
+                <div>
+                  <img src="https://static.vecteezy.com/system/resources/thumbnails/006/547/259/small/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg" 
+                  alt="logo" className="size-24 rounded" />
                 </div>
                 <div>
                   <div className="ml-10 flex items-baseline space-x-4">
@@ -31,14 +32,20 @@ const Nav = () => {
                           Contacto
                         </Link>
                       </li>
+                      <li>
+                        <Link to="/staff" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                          Nuestro Staff
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <button type="button" className={styles.button}>          
-                <CartWidget/>
-              </button>
-            
+              <Link to="/pendiente" >                       
+                <button type="button" className="size-24 rounded bg-white p-2 hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2">          
+                  <CartWidget/>
+                </button>
+              </Link>
             </div>
           </div>
 
