@@ -8,6 +8,7 @@ import ContactForm from './components/forms/ContactForm';
 import ItemListContainer from './components/items/ItemListContainer';
 import './App.css';
 import Contacto from './pages/Contacto';
+import CartWidget from './components/cart/CartWidget';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/productos' element={<ItemListContainer/>} />
           <Route path='/staff' element={<Staff/>} />
           <Route path='/pendiente' element={<Pendiente/>} />
+          <Route path='/CartWidget' element={<CartWidget/>} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
         </Route>
       </Routes>
