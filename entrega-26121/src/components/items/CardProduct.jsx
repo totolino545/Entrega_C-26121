@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
-import CartButtons from '../cart/CartButtons';
+import Favorito from '../buttons/Favorito';
 import './CardProduct.css'
 // import toCart from '../buttons/toCart'
 
@@ -17,19 +17,9 @@ function CardProduct({ title, description, price, image, category, id }) {
     addToCart(producto, cantidad);
     alert(`Agregaste ${cantidad} unidades de ${nombre} al carrito.`);
   };
-
-  const toggleFavorito = () => setFavorito(!favorito);
-
-  const incrementar = () => {
-    setCantidad(cantidad + 1)
-    console.log(cantidad);
-
+  const toggleFavorito = () => {
+    setFavorito(!favorito);
   };
-
-  const decrementar = () => {
-    if (cantidad > 0)
-      setCantidad(cantidad - 1)
-  }
 
   return (
 
@@ -40,7 +30,6 @@ function CardProduct({ title, description, price, image, category, id }) {
           <div className="card__image">
             <img src={image}
               alt='Imagen del Producto'
-
             />
           </div>
           <div className="card__text">
@@ -50,24 +39,10 @@ function CardProduct({ title, description, price, image, category, id }) {
 
       </div>
       <div className="card__footer">
-        <div className="card__price">us$ {price}</div>
-        {/* <div className="card__button">
-          <button onClick={incrementar}>+</button>
-        </div>
-        <div className="card__cart">{cantidad}</div> */}
-        {/* <div className="card__button">
-          <button onClick={decrementar}>-</button>
-        </div>
-        <button onClick={handleAddToCart}>
-          Agregar {cantidad} al carrito
-        </button> */}
-        <button
-          onClick={toggleFavorito}
-          className={favorito ? 'favoritoActivo' : 'favorito'}
-          aria-label={favorito ? 'Quitar de favoritos' : 'Agregar a favoritos'}
-        >
-          {favorito ? '♥' : '♡'}
-        </button>
+        <div className="card__price">us$ {price.toFixed(2)}</div>
+        <Favorito
+          isFavorite={favorito}
+          onToggle={toggleFavorito} />
       </div>
     </div>
 

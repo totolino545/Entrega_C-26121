@@ -135,25 +135,5 @@
     box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
   }
  
-  .favoritoActivo {
-    width: 35px;
-    height: 35px;   
-    border-radius: 50%; 
-    background: red; 
-    color: gold; 
-  } 
-  .favorito {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%; 
-  background: grey; 
-  color: white; 
-  } 
-
-  .favorito:hover {
-  transform: scale(1.1);
-}
- .favoritoActivo:hover {
-  transform: scale(1.1);
-}
+ 
 

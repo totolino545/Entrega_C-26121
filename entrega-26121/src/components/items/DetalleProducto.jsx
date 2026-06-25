@@ -22,33 +22,81 @@ const DetalleProducto = () => {
   if (!product.id) return <h2>Producto no encontrado.</h2>;
 
   return (
-    // <div className="flex flex-col  items-center m-4 p-4 gap-8">
-    //   <h2>Descripcion del producto</h2>
-    //   <p>{product.description}</p>
-    //   <CardProduct {...product} /> 
-    // </div>
-    <div className="group block flex flex-col items-center m-4 p-4 gap-8">
-        <button className="relative end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-    <span class="sr-only">Wishlist</span>
+    <div classNameName="group block flex flex-col items-center m-4 p-4 gap-8 rounded-se-3xl border border-gray-100">
+      <div classNameName="flex flex-row" >
+        {/* <img src={product.image} classNameName=" w-75 object-cover sm:h-112.5" /> */}
 
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
-    </svg>
-  </button>
-      <img src={product.image}className=" object-cover sm:h-112.5" />
 
-      <div className="mt-3 flex justify-between text-sm">
+        <div className="border border-gray-300 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8" aria-modal="true" role="dialog" tabindex="-1">
+<h3 className="text-sxltext-gray-900">{product.title}</h3>
+
+          <div className="mt-4 space-y-6 gap-4">
+            <ul className="space-y-4">
+              <li className="flex items-center gap-4">
+                <img src={product.image}/>
+
+                <div>
+                  {/* <h3 className="text-sm text-gray-900">{product.title}</h3> */}
+
+                  <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                    <div>
+                      <dt className="inline">Size:</dt>
+                      <dd className="inline">XXS</dd>
+                    </div>
+
+                    <div>
+                      <dt className="inline">Color:</dt>
+                      <dd className="inline">White</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div className="flex flex-1 items-center justify-end gap-2">
+                  <form>
+                    <label for="Line1Qty" className="sr-only"> Quantity </label>
+
+                    <input type="number" min="1" value="1" id="Line1Qty" className="h-8 w-12 rounded-sm border-gray-300 bg-white p-0 text-center text-xs text-gray-700 [-moz-appearance:textfield] focus:outline-hidden [&amp;::-webkit-inner-spin-button]:m-0 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:m-0 [&amp;::-webkit-outer-spin-button]:appearance-none" />
+                  </form>
+
+                  <button className="text-gray-600 transition hover:text-red-600">
+                    <span className="sr-only">Remove item</span>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+                    </svg>
+                  </button>
+                </div>
+              </li>
+
+            </ul>
+
+            <div className="space-y-4 text-center">
+              <a href="#" className="block rounded-sm border border-gray-300 bg-gray-50 px-5 py-3 text-sm text-gray-700 transition-colors hover:text-gray-900">
+                View my cart (2)
+              </a>
+
+              <a href="#" className="block rounded-sm border border-blue-600 bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-blue-700 hover:bg-blue-700">
+                Checkout
+              </a>
+
+              <a href="#" className="inline-block text-sm text-gray-600 underline underline-offset-4 transition-colors hover:text-gray-700">
+                Continue shopping
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div classNameName="mt-3 flex justify-between text-m gap-6">
         <div>
-          <h3 className="text-gray-900 group-hover:underline group-hover:underline-offset-4">
+          <h3 classNameName="text-gray-900 group-hover:underline group-hover:underline-offset-4">
             {product.title}
           </h3>
 
-          <p className="mt-1.5 text-xs text-pretty text-gray-500">
+          <p classNameName="mt-1.5 text-sm text-center text-pretty text-gray-700">
             {product.description}
           </p>
         </div>
-
-        <p className="text-gray-900">$299</p>
+        <p classNameName="text-gray-900">u$S {product.price.toFixed(2)}</p>
       </div>
     </div>
   );

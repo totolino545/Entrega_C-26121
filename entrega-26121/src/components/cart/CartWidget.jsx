@@ -12,9 +12,6 @@ const CartWidget = () => {
       <span className="absolute -top-2 right-4 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center" >
         {totalItems}
       </span>
-
-
-
     </div>
   );
 };
