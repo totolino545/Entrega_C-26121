@@ -19,6 +19,11 @@ function Links() {
                       </Link>
                     </li>
                     <li>
+                      <Link to="/carrito" className="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">
+                        Carrito
+                      </Link>
+                    </li>
+                    <li>
                       <Link to="/staff" className="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">
                         Nuestro Staff
                       </Link>
