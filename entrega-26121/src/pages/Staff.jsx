@@ -21,15 +21,15 @@ const Staff = () => {
     }, []);
   return (
     <div className={styles.inicio} >
-        <div className='font-mono p-10'>
-            <h2 className="font-bold mx-20">
+        <div className='max-w-prose px-6 py-2 text-gray-900 '>
+            <h2 className="mt-4 text-pretty text-gray-700 font-mono font-medium">
             Detrás de cada pedido hay personas reales. 
             Nos encargamos de que todo funcione: 
             responder tus mensajes, empaquetar con mimo y mejorar la tienda cada día. 
             Detrás de esta pantalla no hay bots, solo ganas de hacerlo bien.
             Si tienes una duda, al otro lado hay alguien que quiere ayudarte.</h2>
         </div>
-        <div className="flex flex-col items-center font-mono mb-5">
+        <div className="flex flex-col items-center font-mono m-8">
             <h1 className="text-xl leading-8 md:text-2xl mb-8 max-w-3xl mx-auto">
                 Nuestro Staff
             </h1> 

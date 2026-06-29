@@ -53,7 +53,7 @@ const Inicio = () => {
                       <img 
                         src={cat.image} 
                         alt="icono"
-                        className="w-32 h-32 m-4 rounded-t-lg "
+                        className="h-32 m-4 rounded-t-lg "
                       />
                       <p className=' font-mono text-center'>{cat.category}</p>
                     </a>

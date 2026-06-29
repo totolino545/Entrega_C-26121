@@ -15,6 +15,7 @@ const CartButtons= () => {
   }
 
   return
+  (
   <div>
     <div className="mt-4 flex justify-between absolute inset-x-0 bottom-">
       <div>
@@ -25,7 +26,7 @@ const CartButtons= () => {
       <button onClick={incrementar}> + </button>
     </div>
   </div>
-}
+)}
 
 export default CartButtons
 
