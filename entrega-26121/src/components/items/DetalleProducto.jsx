@@ -9,34 +9,35 @@ const DetalleProducto = () => {
 
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const stock = 10
   const [cantidad, setCantidad] = useState(0);
-  const [showToast, setShowToast] = useState(false); 
-  
+  const [showToast, setShowToast] = useState(false);
+
 
   // Lógica del Carrito
   const { addToCart, getCantidadActual } = useCart(); // Traemos la función del contexto
   const cantidadActual = getCantidadActual(id);
+
   const handleAddToCart = () => {
     addToCart(product, cantidad);
     setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 1500);
 
-     setTimeout(() => {
-        setShowToast(false);
-      }, 1500);
-    
   };
 
-  const incrementar = () => {
-    if (cantidad < stock)
-      setCantidad(cantidad + 1)
-    console.log(cantidad);
+  const incrementar = (currentQuantity, stock) => {
+    if (currentQuantity < stock) {
+      setCantidad(currentQuantity + 1)
+    }
+
   };
 
-  const decrementar = () => {
-    if (cantidad > 0)
-      setCantidad(cantidad - 1)
-  }
+  const decrementar = (currentQuantity) => {
+    if (currentQuantity > 0) {
+      setCantidad(currentQuantity - 1)
+    }
+  };
 
   useEffect(() => {
     fetch("/data/products.json")
@@ -44,12 +45,18 @@ const DetalleProducto = () => {
       .then(data => {
         const productoEncontrado = data.find(p => p.id === parseInt(id));
         setProduct(productoEncontrado);
-
       })
       .catch(error => console.error("Error al cargar el producto:", error));
   }, [id]);
 
-  if (!product) return <h2>Cargando detalle del producto...</h2>;
+  if (!product) return (
+    <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
+      <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">Procesando</h1>
+      <p className="mt-2 text-gray-600">Cargando los productos.   Espera unos segundos...</p>
+      <Link to="/productos" className="mt-6 inline-block rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+        Ver Productos
+      </Link>
+    </div>);
 
   if (!product.id) return <h2>Producto no encontrado.</h2>;
 
@@ -58,33 +65,33 @@ const DetalleProducto = () => {
 
     <section>
 
-      { showToast && (
-      <div role="alert" className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 rounded-md border border-green-500 bg-green-50 p-4 shadow-2xl z-50 animate-fadeI">
-        <div className="flex items-start gap-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="-mt-0.5 size-6 text-green-700"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+      {showToast && (
+        <div role="alert" className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 rounded-md border border-green-500 bg-green-50 p-4 shadow-2xl z-50 animate-fadeI">
+          <div className="flex items-start gap-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="-mt-0.5 size-6 text-green-700"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
 
-          <div className="flex-1">
-            <strong className="block leading-tight font-medium text-green-800"> Success </strong>
+            <div className="flex-1">
+              <strong className="block leading-tight font-medium text-green-800"> Success </strong>
 
-            <p className="mt-0.5 text-sm text-green-700">
-              Agregaste {cantidad} unidades de {product.title} al carrito.
-            </p>
+              <p className="mt-0.5 text-sm text-green-700">
+                Agregaste {cantidad} unidades de {product.title} al carrito.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
       )}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-8 justify-items-center">
@@ -105,6 +112,9 @@ const DetalleProducto = () => {
               <p className="mt-4 text-pretty text-gray-700 ">
                 {product.description}
               </p>
+              <p className="mt-4 text-pretty text-gray-700 ">
+                {product.stock}
+              </p>
               <div className="mt-4 flex flex-col justify-between ">
                 <div className="flex justify-center gap-4">
                   <h2>Precio</h2>
@@ -113,9 +123,16 @@ const DetalleProducto = () => {
 
                 <div className="flex justify-center items-center text-pretty text-gray-700">
                   Haz tu pedido
-                  <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={decrementar}> - </button>
+                  {/* <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={decrementar}> - </button>
                   <p className="h-8 w-8 text-center py-2 rounded-sm border-gray-300 bg-white text-xs text-gray-700">{cantidad}</p>
-                  <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={incrementar}> + </button>
+                  <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={incrementar}> + </button> */}
+                  <CartButtons
+                    itemId={product.id}
+                    stock={product.stock || 10}
+                    incrementar={() => incrementar(cantidad, product.stock || 10)}
+                    decrementar={() => decrementar(cantidad)}
+                    cantidad={cantidad || 0}
+                  />
                 </div>
               </div>
               <form className="mt-4 flex gap-4" onSubmit={(e) => e.preventDefault()}>

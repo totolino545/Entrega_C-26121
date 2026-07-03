@@ -1,32 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const CartButtons= () => {
-  const stock = 0
-  const [cantidad, setCantidad] = useState(0);
+const CartButtons = ({ cantidad, incrementar, decrementar, stock }) => {
 
-  const incrementar = () => {
-    if (cantidad < stock)
-      setCantidad(cantidad + 1)
-  };
+  return (
 
-  const decrementar = () => {
-    if (cantidad > 0)
-      setCantidad(cantidad - 1)
-  }
-
-  return
-  (
-  <div>
-    <div className="mt-4 flex justify-between absolute inset-x-0 bottom-">
-      <div>
-        <h3 className="mt-1 text-sm text-gray-500">{price} ARS</h3>
-      </div>
-      <button onClick={decrementar}> - </button>
-      <p>{cantidad}</p>
-      <button onClick={incrementar}> + </button>
+    <div className="flex justify-center items-center text-pretty text-gray-700">
+      
+      <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={decrementar}> - </button>
+      <p className="h-8 w-8 text-center py-2 rounded-sm border-gray-300 bg-white text-xs text-gray-700">{cantidad}</p>
+      <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={incrementar}> + </button>
     </div>
-  </div>
-)}
+  )
+}
 
 export default CartButtons
 
