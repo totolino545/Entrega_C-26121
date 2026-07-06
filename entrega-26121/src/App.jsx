@@ -5,6 +5,7 @@ import Staff from './pages/Staff';
 import Pendiente from './pages/Pendiente';
 import DetalleProducto from './components/items/DetalleProducto';
 import ContactForm from './components/forms/ContactForm';
+import GestionForm from './components/forms/GestionForm';
 import ItemListContainer from './components/items/ItemListContainer';
 import './App.css';
 import Contacto from './pages/Contacto';
@@ -17,6 +18,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path='/' element={<Inicio/>}/>
           <Route path='/contacto' element={<ContactForm/>}/>
+          <Route path='/gestion' element={<GestionForm/>}/>
           <Route path='/productos' element={<ItemListContainer/>} />
           <Route path='/staff' element={<Staff/>} />
           <Route path='/pendiente' element={<Pendiente/>} />

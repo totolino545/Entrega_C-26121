@@ -1,13 +1,20 @@
 import { createContext, useContext } from "react";
 import { collection, doc, updateDoc, deleteDoc, addDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
+import { usePagination } from "../hooks/usePagination";
 
+export const ProductosContext = createContext();
 
-export const ProductContext = createContext();
-
-export const ProductProvider = ({ children }) => {
+export const ProductosProvider = ({ children }) => {
   // Consumimos el hook generico pasandole la coleccion especifica de este contexto
-
+  const { 
+    data: productos, 
+    cargando, 
+    paginaActual, 
+    totalPaginas, 
+    cargarPagina, 
+    refrescarPagina 
+  } = usePagination("productos", "title", 4);
 
   // Operaciones CRUD
   const agregarProducto = async (nuevoProd) => {
@@ -27,12 +34,13 @@ export const ProductProvider = ({ children }) => {
   };
 
   return (
-    <ProductContext.Provider value={{ 
-       eliminarProducto, agregarProducto, editarProducto 
+    <ProductosContext.Provider value={{ 
+      productos, cargando, paginaActual, totalPaginas, 
+      cargarPagina, eliminarProducto, agregarProducto, editarProducto 
     }}>
       {children}
-    </ProductContext.Provider>
+    </ProductosContext.Provider>
   );
 };
 
-export const useProducts = () => useContext(ProductContext);
+export const useProductos = () => useContext(ProductosContext);

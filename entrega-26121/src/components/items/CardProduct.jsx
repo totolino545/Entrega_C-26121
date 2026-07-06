@@ -23,7 +23,6 @@ function CardProduct({ title, description, price, image, category, id }) {
 
   return (
 
-
     <div className="card">
       <div className="card__content">
         <Link to={`/producto/${id}`} className="group relative">

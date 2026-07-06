@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const FormProducto = ({ datosForm, manejarCambio, manejarEnvio, manejarCambioImagen, modo = "agregar", cargando }) => {
+const FormProducto = ({ datosForm, manejarCambio, manejarEnvio, manejarCambioImagen, modo = "agregar" }) => {
         const [category, setCategory] = useState([]);
         const [error, setError] = useState(null);
         const [cargando, setCargando] = useState(true);

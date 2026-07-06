@@ -1,27 +1,28 @@
 import { useState } from "react";
 import FormContainer from "./FormContainer";
-import { useProductos } from "../../context/ProductosContext";
-import styles from "./Dashboard.module.css";
-import TrashIcon from "../../assets/icons/TrashIcon";
-import EditIcon from "../../assets/icons/EditIcon";
-import Paginacion from "../Paginacion";
+import { useProductos } from "../../context/ProductContext";
+
+// import TrashIcon from "../../assets/icons/TrashIcon";
+// import EditIcon from "../../assets/icons/EditIcon";
+// import Paginacion from "../Paginacion";
 
 const GestionForm = () => {
   // EL CAMBIO ESTÁ ACÁ: Extraemos todas las variables de la paginación que provee el contexto
   const { 
-    productos, 
+    products, 
     eliminarProducto, 
     paginaActual, 
     totalPaginas, 
     cargarPagina, 
     cargando 
-  } = useProductos();
+  } = useProducts();
 
   // null   → modal cerrado
   // false  → modal abierto en modo "agregar"
   // obj    → modal abierto en modo "editar" con ese producto
   const [productoEditando, setProductoEditando] = useState(null);
   const [modalAbierto, setModalAbierto] = useState(false);
+  // const [cargando, setCargando] = useState(false);
   
   const abrirAgregar = () => {
     setProductoEditando(null);
@@ -44,18 +45,18 @@ const GestionForm = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
+    <div className="">
+      <header className="">
         <h1>Inventario</h1>
-        <button className={styles.btnNuevo} onClick={abrirAgregar}>
+        <button className="" onClick={abrirAgregar}>
           + Agregar Producto
         </button>
       </header>
 
       {modalAbierto && (
-        <div className={styles.overlay}>
-          <div className={styles.modal}>
-            <button className={styles.btnClose} onClick={cerrarModal}>
+        <div className="">
+          <div className="">
+            <button className="" onClick={cerrarModal}>
               &times;
             </button>
             <FormContainer
@@ -68,15 +69,15 @@ const GestionForm = () => {
 
       {/* Render condicional por si está cargando los productos */}
       {cargando && productos.length === 0 ? (
-        <div className={styles.estadoWrapper}>
-          <p className={styles.estadoTexto}>Cargando inventario...</p>
+        <div className="">
+          <p className="">Cargando inventario...</p>
         </div>
       ) : (
         <>
-          <div className={styles.cuerpo}>
-            <ul className={styles.lista}>
-              {productos.map(prod => (
-                <li key={prod.id} className={styles.item}>
+          <div className="">
+            <ul className="">
+              {products.map(prod => (
+                <li key={prod.id} className="">
                   {prod.imagen && (
                     <img
                       src={prod.imagen}
@@ -85,27 +86,27 @@ const GestionForm = () => {
                     />
                   )}
 
-                  <div className={styles.itemInfo}>
+                  <div className="">
                     <h4>{prod.nombre}</h4>
-                    <div className={styles.itemMeta}>
-                      <span className={styles.precio}>${prod.precio}</span>
+                    <div className="">
+                      <span className="">${prod.precio}</span>
                       {prod.categoria && (
-                        <span className={styles.categoria}>{prod.categoria}</span>
+                        <span className="">{prod.categoria}</span>
                       )}
-                      <span className={styles.stock}>Stock: {prod.stock}</span>
+                      <span className="">Stock: {prod.stock}</span>
                     </div>
                   </div>
 
-                  <div className={styles.itemAcciones}>
+                  <div className="">
                     <button
-                      className={styles.btnEditar}
+                      className=""
                       onClick={() => abrirEditar(prod)}
                       aria-label="Editar producto"
                     >
                       <EditIcon />
                     </button>
                     <button
-                      className={styles.btnBorrar}
+                      className=""
                       onClick={() => manejarEliminar(prod.id)}
                       aria-label="Eliminar producto"
                     >
@@ -118,12 +119,12 @@ const GestionForm = () => {
           </div>
 
           {/* El componente ahora recibe las variables correctamente sin romper la app */}
-          <Paginacion 
+          {/* <Paginacion 
             paginaActual={paginaActual} 
             totalPaginas={totalPaginas} 
             cargarPagina={cargarPagina} 
             cargando={cargando} 
-          />
+          /> */}
         </>
       )}
     </div>

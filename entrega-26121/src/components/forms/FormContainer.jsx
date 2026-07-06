@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useProductos } from "../../context/ProductContext";
-import FormProducto from "./FormProducto";
+import FormProduct from "./FormProduct";
 
 const IMGBB_KEY = "97bf6701897560c4471ebe4dccc144a1";
 
@@ -128,7 +128,7 @@ const FormContainer = ({ cerrarModal, productoEditar = null }) => {
   };
 
   return (
-    <FormProducto
+    <FormProduct
       datosForm={datosForm}
       manejarCambio={manejarCambio}
       manejarEnvio={manejarEnvio}

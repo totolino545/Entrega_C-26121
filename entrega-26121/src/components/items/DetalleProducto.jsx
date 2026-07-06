@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 import { useCart } from '../../context/CartContext';
+import { useProductos } from "../../context/ProductContext";
 import CardProduct from "./CardProduct";
 import CartButtons from "../cart/CartButtons";
 
 const DetalleProducto = () => {
 
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const { productos } = useProductos();
+  const product = productos.find(p => p.id === id);
   const [cantidad, setCantidad] = useState(0);
   const [showToast, setShowToast] = useState(false);
 
@@ -39,15 +43,16 @@ const DetalleProducto = () => {
     }
   };
 
-  useEffect(() => {
-    fetch("/data/products.json")
-      .then(response => response.json())
-      .then(data => {
-        const productoEncontrado = data.find(p => p.id === parseInt(id));
-        setProduct(productoEncontrado);
-      })
-      .catch(error => console.error("Error al cargar el producto:", error));
-  }, [id]);
+
+  // useEffect(() => {
+  //   if (productos.length > 0) {
+  //     const productoEncontrado = productos.find((prod) => prod.id === id);
+  //     setProduct(productoEncontrado);
+  //     console.log(productos);
+  //   } else {
+  //     setProduct(null);
+  //   }
+  // }, [id, productos]);
 
   if (!product) return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
@@ -59,6 +64,7 @@ const DetalleProducto = () => {
     </div>);
 
   if (!product.id) return <h2>Producto no encontrado.</h2>;
+  console.log("Cantidad actual en el carrito:", product);
 
   return (
 
@@ -112,20 +118,19 @@ const DetalleProducto = () => {
               <p className="mt-4 text-pretty text-gray-700 ">
                 {product.description}
               </p>
-              <p className="mt-4 text-pretty text-gray-700 ">
-                {product.stock}
-              </p>
+
               <div className="mt-4 flex flex-col justify-between ">
                 <div className="flex justify-center gap-4">
-                  <h2>Precio</h2>
+                  <p>Stock</p>
+                  <h3 className="text-pretty text-gray-700 ">
+                    {product.stock}
+                  </h3>
+                  <p>Precio</p>
                   <h3 className="text-2xl font-semibold text-gray-900 sm:text-xl">U$s  {product.price.toFixed(2)}</h3>
                 </div>
 
                 <div className="flex justify-center items-center text-pretty text-gray-700">
                   Haz tu pedido
-                  {/* <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={decrementar}> - </button>
-                  <p className="h-8 w-8 text-center py-2 rounded-sm border-gray-300 bg-white text-xs text-gray-700">{cantidad}</p>
-                  <button className="size-10 leading-10 text-gray-400 transition hover:text-black" onClick={incrementar}> + </button> */}
                   <CartButtons
                     itemId={product.id}
                     stock={product.stock || 10}
