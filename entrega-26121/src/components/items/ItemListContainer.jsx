@@ -8,7 +8,7 @@ import ItemList from "./ItemList";
 const ItemListContainer = () => {
 
     const { productos, cargando, paginaActual, totalPaginas, cargarPagina } = useProductos();
-    console.log(cargando);
+
     if (cargando && productos.length === 0) {
         return (
             <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">

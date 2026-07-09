@@ -7,12 +7,13 @@ import FormProduct from "./FormProduct";
 const IMGBB_KEY = "97bf6701897560c4471ebe4dccc144a1";
 
 const ESTADO_INICIAL = {
-  nombre: "",
-  precio: "",
-  descripcion: "",
+  title: "",
+  price: "",
+  description: "",
   stock: "",
-  categoria: "",
+  category: "",
   slug: "",
+  image: ""
 };
 
 // productoEditar: si viene con datos → modo editar, si es null → modo agregar
@@ -30,11 +31,11 @@ const FormContainer = ({ cerrarModal, productoEditar = null }) => {
   useEffect(() => {
     if (productoEditar) {
       setDatosForm({
-        nombre: productoEditar.title ?? "",
-        precio: productoEditar.price ?? "",
-        descripcion: productoEditar.description ?? "",
+        title: productoEditar.title ?? "",
+        price: productoEditar.price ?? "",
+        description: productoEditar.description ?? "",
         stock: productoEditar.stock ?? "",
-        categoria: productoEditar.category ?? "",
+        category: productoEditar.category ?? "",
         slug: productoEditar.slug ?? "",
       });
     }
@@ -84,8 +85,8 @@ const FormContainer = ({ cerrarModal, productoEditar = null }) => {
 
         const productoNuevo = {
           ...datosForm,
-          imagen: urlImagen,
-          precio: Number(datosForm.price),
+          image: urlImagen,
+          price: Number(datosForm.price),
           stock:  Number(datosForm.stock),
         };
 

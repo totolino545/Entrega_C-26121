@@ -44,16 +44,6 @@ const DetalleProducto = () => {
   };
 
 
-  // useEffect(() => {
-  //   if (productos.length > 0) {
-  //     const productoEncontrado = productos.find((prod) => prod.id === id);
-  //     setProduct(productoEncontrado);
-  //     console.log(productos);
-  //   } else {
-  //     setProduct(null);
-  //   }
-  // }, [id, productos]);
-
   if (!product) return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
       <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">Procesando</h1>
@@ -64,10 +54,8 @@ const DetalleProducto = () => {
     </div>);
 
   if (!product.id) return <h2>Producto no encontrado.</h2>;
-  console.log("Cantidad actual en el carrito:", product);
 
   return (
-
 
     <section>
 

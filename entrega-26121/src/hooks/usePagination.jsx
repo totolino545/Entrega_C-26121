@@ -19,7 +19,7 @@ export const usePagination = (nombreColeccion , campoOrden = "title", itemsPorPa
       console.error("Error al obtener total:", error);
     }
   };
-console.log("Total de páginas:", totalPaginas);
+
   // Función común para cargar una página específica
   const cargarPagina = async (numeroPagina) => {
     setCargando(true);
@@ -57,7 +57,6 @@ console.log("Total de páginas:", totalPaginas);
 
       // Guardar los datos en el estado para que se muestren en pantalla
       setData(items);
-      console.log("Datos cargados para la página", numeroPagina, snapshot, db);
       setPaginaActual(numeroPagina);
 
       // Guardar el "marcador" para el futuro

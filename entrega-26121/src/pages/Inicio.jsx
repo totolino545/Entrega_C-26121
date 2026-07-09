@@ -22,7 +22,7 @@ const Inicio = () => {
   return (
     <div className={styles.inicio} >
       <div className='font-mono p-4'>
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <h1 className="text-4xl md:text-xxl font-bold mb-6">
           Bienvenido a{' '}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-400">
             TechStore

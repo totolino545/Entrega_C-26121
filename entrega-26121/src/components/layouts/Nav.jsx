@@ -1,71 +1,132 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Nav.module.css';
+import { useAuth } from "../../context/AuthContext";
 import CartWidget from '../cart/CartWidget';
 import Links from './Links';
+import SearchBar from "../search/SearchBar"
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Función para capitalizar la primera letra del nombre
+  const capitalizarNombre = (string) => {
+    if (!string) return "";
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
+
+  const obtenerNombreMostrado = () => {
+    if (user?.nombre) {
+      // 1. Cortamos el string en el primer espacio en blanco para quedarnos solo con el primer nombre
+      const primerNombre = user.nombre.split(" ")[0];
+      return capitalizarNombre(primerNombre);
+    }
+
+    if (user?.email) {
+      // Si no hay nombre y usamos el email, también cortamos por si el email tiene puntos o guiones (ej: jose.navarro)
+      const usuarioEmail = user.email.split("@")[0].split(".")[0].split("-")[0];
+      return capitalizarNombre(usuarioEmail);
+    }
+
+    return "Usuario";
+  };
+  
   return (
+  <header className="relative rounded-2xl bg-teal-900 shadow-md">
+    {/* ================= HEADER ================= */}
+    <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
 
-    <div className={styles.nav}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ================= MOBILE ================= */}
+      <div className="flex w-full items-center justify-between gap-3 md:hidden">
 
-        <div className="flex h-24 items-center justify-between z-30">
-          {/* Menú Mobile */}
-          <div className="block md:hidden ">
-            <button
-              className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
-              onClick={toggleMenu}
+        {/* Botón menú */}
+        <button
+          onClick={toggleMenu}
+          className="rounded-lg bg-white/10 p-2 text-white hover:bg-white/20 transition"
+        >
+          {isOpen ? "✕" : "☰"}
+        </button>
 
-            >
-              {isOpen ? '✕' : '☰'}
-
-
-            </button>
-          </div>
-          <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-
-            <div className="absolute inset-s-0 top-26 left-2 h-64 w-64 px-2 pt-2 pb-3 gap-6 space-y-1 sm:px-3 bg-black shadow-lg opacity-80 z-20">
-              <div className="">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/006/547/259/small/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg"
-
-                  alt="logo" className="h-8 rounded" />
-
-              </div>
-              <Links />
-            </div>
-          </div>
-          <div className="hidden md:block md:flex md:items-center md:gap-12">
-
-            <span className="sr-only">Home</span>
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/006/547/259/small/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg"
-              alt="logo" className="h-16 rounded" />
-          </div>
-
-          <div className="hidden md:block">
-            <Links />
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
-              <Link to="/carrito" >
-                <button type="button" className="mt-0 size-16 rounded  hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2">
-                  <CartWidget />
-                </button>
-              </Link>
-            </div>
-
-          </div>
+        {/* Buscador */}
+        <div className="flex-1">
+          <SearchBar />
         </div>
+
+        {/* Carrito */}
+        <Link to="/carrito">
+          <button className="rounded-lg p-2 hover:bg-white/10 transition">
+            <CartWidget />
+          </button>
+        </Link>
+
       </div>
+
+      {/* ================= ESCRITORIO ================= */}
+      <div className="hidden md:flex w-full items-center">
+
+        {/* Logo */}
+        <div className="shrink-0">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/006/547/259/small/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg"
+            alt="logo"
+            className="h-10 rounded-lg"
+          />
+        </div>
+
+        {/* Links */}
+        <div className="ml-6 flex-1">
+          <Links />
+        </div>
+
+        {/* Search */}
+        <div className="mr-3 w-80">
+          <SearchBar />
+        </div>
+
+        {/* Carrito */}
+        <Link to="/carrito">
+          <button className="rounded-lg p-2 hover:bg-white/10 transition">
+            <CartWidget />
+          </button>
+        </Link>
+
+      </div>
+
     </div>
 
-  );
+    {/* ================= MENÚ MOBILE ================= */}
+    {isOpen && (
+      <div
+        className="absolute left-0 top-full z-50 w-1/2 bg-black/90 shadow-xl md:hidden"
+        onClick={() => setIsOpen(false)}
+      >
+        <div className="p-5">
+
+          <div className="mb-6 flex items-center gap-3">
+
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/006/547/259/small/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg"
+              alt="logo"
+              className="h-10 rounded-lg"
+            />
+
+            <span className="font-medium text-white">
+              {obtenerNombreMostrado()}
+            </span>
+
+          </div>
+
+          <Links />
+
+        </div>
+      </div>
+    )}
+  </header>
+);
 }
 
 export default Nav;
