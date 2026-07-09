@@ -4,7 +4,7 @@ import { db } from "../../firebase/config";
 import { useProductos } from "../../context/ProductContext";
 import FormProduct from "./FormProduct";
 
-const IMGBB_KEY = "97bf6701897560c4471ebe4dccc144a1";
+const IMGBB_KEY = import.meta.env.VITE_IMGBB_KEY; 
 
 const ESTADO_INICIAL = {
   title: "",
